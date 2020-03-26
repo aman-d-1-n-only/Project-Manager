@@ -2,11 +2,11 @@
     <div class="navbar">
         <nav class="nav-extended green ">
             <div class="nav-content">
-                <router-link to="">
+                <router-link :to= " { name : 'Index'} ">
                     <span class="nav-title"> Project Manager </span>
                 </router-link>   
                 <a href="" class="btn-floating btn-large halfway-fab pink">
-                    <router-link to="">
+                    <router-link :to=" {name:'AddProject'} ">
                         <i class="material-icons">add</i>
                     </router-link>  
                 </a>

@@ -16,22 +16,43 @@
 </template>
 
 <script>
+//importing the database here
+import db from "@/Firebase/init"
+
 export default {
   name: 'Index',
   data () {
     return {
     projects:[
-      {title:"Freelance India",slug:"freelanceIndia",stacks:["Vue.js","Firebase","Git-lab"],id:'1'},
-      {title:"Veg Works",slug:"vegWorks",stacks:["Solidity","React","node.js"],id:'2'}
+      
     ]
     }
   },
   methods:{
     deleteProject(id){
+      
+      db.collection("projects").doc(id).delete()
+      .then(() => {
       this.projects=this.projects.filter(project => {
-         return project.id != id 
+        return project.id != id
+        })
       })
     }
+  },
+
+  //created hook present when everything is created before rendering
+  created(){
+    
+    //to fetch the data before it is created
+   db.collection('projects').get()
+   .then(snapshot => {
+     //snapshot will contain all the document we want to have 
+     snapshot.forEach(doc => {
+      let project =doc.data()
+          project.id =doc.id
+          this.projects.push(project)
+     })
+   })
   }
 }
 </script>
