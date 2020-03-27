@@ -51,7 +51,7 @@ export default {
                if(this.project.title){
                 this.feedback=null
                 //creating a slug(what we want to slugify, function how we want to slugify)
-                this.slug =slugify(this.project.title,{
+                this.project.slug =slugify(this.project.title,{
                    replacement:"-",
                    remove:/[$*_+`.()'"!\-:@]/g,
                    lower:true
@@ -59,8 +59,8 @@ export default {
 
                 db.collection("projects").doc(this.project.id).update({
           title: this.project.title,
-          slug: this.slug,
-          ingredients: this.project.stacks
+          slug: this.project.slug,
+          stacks: this.project.stacks
         }).then(() => {
           this.$router.push({ name: 'Index' })
         }).catch(err => {
